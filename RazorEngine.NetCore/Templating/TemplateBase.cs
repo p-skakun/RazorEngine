@@ -9,7 +9,7 @@ namespace RazorEngine.Templating
     using System.Threading.Tasks;
     using Text;
 #if RAZOR4
-    using SectionAction = System.Action<System.IO.TextWriter>;
+    using SectionAction = System.Action;
 #else
     using SectionAction = System.Action;
 #endif
@@ -278,11 +278,11 @@ namespace RazorEngine.Templating
                 throw new ArgumentException("No section has been defined with name '" + name + "'");
 
             if (action == null)
-#if RAZOR4
-                action = (tw) => { };
-#else
+//#if RAZOR4
+//                action = (tw) => { };
+//#else
                 action = () => { };
-#endif
+//#endif
 
             return new TemplateWriter(tw =>
             {

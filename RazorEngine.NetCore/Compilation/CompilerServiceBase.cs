@@ -1,4 +1,7 @@
-﻿namespace RazorEngine.Compilation
+﻿using Microsoft.AspNetCore.Razor.Language.Extensions;
+
+
+namespace RazorEngine.Compilation
 {
     using System;
     using System.CodeDom;
@@ -286,6 +289,9 @@
                         @class.Modifiers.Add("internal");
                     });
                 builder.Features.Add(new SuppressChecksumOptionsFeature());
+                InheritsDirective.Register(builder);
+                FunctionsDirective.Register(builder);
+                SectionDirective.Register(builder);
                 context.ConfigureCompilerBuilder?.Invoke(builder);
             });
 

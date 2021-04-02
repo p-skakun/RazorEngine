@@ -6,7 +6,7 @@
     using System.IO;
 
 #if RAZOR4
-    using SectionAction = System.Action<System.IO.TextWriter>;
+    using SectionAction = System.Action;
 #else
     using SectionAction = System.Action;
 #endif
@@ -103,9 +103,9 @@
                 var item = _definedSections[section].Pop();
                 poppedSections.Add(Tuple.Create(section, item));
             }
-#if RAZOR4
-            inner(innerArg);
-#else
+//#if RAZOR4
+//            inner(innerArg);
+//#else
             var oldWriter = CurrentWriter;
             try
             {
@@ -116,7 +116,7 @@
             {
                 CurrentWriter = oldWriter;
             }
-#endif
+//#endif
             foreach (var item in poppedSections)
 	        {
 		        _definedSections[item.Item1].Push(item.Item2);
